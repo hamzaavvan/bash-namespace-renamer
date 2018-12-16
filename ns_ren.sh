@@ -18,6 +18,7 @@ Information:
 "
 else
 	for f in `find $1/* -name '*.php'`; do
+		printf $f
 		while IFS= read -r line;do
 			echo "${line/$2/$3}" >> $f.tmp
 		done < $f
@@ -25,6 +26,8 @@ else
 		echo "}" >> $f.tmp
 		mv $f{.tmp,}
 
-		echo "$f completed"
+		GREEN='\033[0;32m'
+		NC='\033[0m' # No Color
+		printf "${GREEN} completed ${NC}\n\r"
 	done
 fi
